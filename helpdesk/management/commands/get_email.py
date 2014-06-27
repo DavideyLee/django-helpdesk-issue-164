@@ -15,6 +15,7 @@ import imaplib
 import mimetypes
 import poplib
 import re
+import mimify
 
 from datetime import timedelta
 from email.header import decode_header
@@ -277,7 +278,8 @@ def ticket_from_message(message, queue, quiet):
 
     for file in files:
         if file['content']:
-            filename = file['filename'].encode('ascii', 'replace').replace(' ', '_')
+            filename = mimify.mime_decode_header(file['filename'])
+            filename = filename.encode('ascii', 'replace').replace(' ', '_')
             filename = re.sub('[^a-zA-Z0-9._-]+', '', filename)
             a = Attachment(
                 followup=f,
