@@ -289,9 +289,6 @@ def ticket_from_message(message, queue, quiet):
                 basename = basename[:basename_len]
                 filename = basename + extension
 
-            print filename
-            print len(filename)
-            print file['type']
             a = Attachment(
                 followup=f,
                 filename=filename,
